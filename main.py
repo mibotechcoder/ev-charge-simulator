@@ -1,9 +1,10 @@
 import dash
 import dash_bootstrap_components as dbc
 import plotly.graph_objs as go
-from dash import dcc, html, Input, Output, State
+from dash import Dash, dcc, html, Input, Output, State
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server  ## För Gunicorn / WSGI (Render)
 
 app.layout = html.Div([  # BYT UT dbc.Container MOT html.Div FÖR FLEX
     html.H2("Beräkning av laddtid för elbil med räckvidsberäkning"),  # === RUBRIK
@@ -374,9 +375,6 @@ def update_range_display(current_km, max_km, battery_kwh, efficiency_pct, charge
 # endregion --- SLUT: callback för batteriikon med text---
 
 # endregion === SLUT UPPDATERA HÄNDELSE I GRAF MED VÄRDE
-
-
-server = app.server  ## För Gunicorn / WSGI (Render)
 
 if __name__ == '__main__':
     app.run(debug=True)
