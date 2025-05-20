@@ -1,0 +1,50 @@
+.Container {
+
+    display: flex;
+}
+
+.evDIV {
+    border: 1px solid rgb(183, 182, 182);
+    border-radius: 5px;
+    width: 500px;
+    height: 350px;
+    padding: 10px 10px 10px 10px;
+    margin-left: 5px;
+    display: block;
+    background-color: rgb(225, 236, 251);
+}
+
+.chDIV {
+    border: 1px solid rgb(183, 182, 182);
+    border-radius: 5px;
+    width: 500px;
+    height: 350px;
+    padding: 10px 10px 10px 10px;
+    margin-left: 5px;
+    display: block;
+    background-color: rgb(209, 247, 184);
+}
+
+
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.main-container {
+    text-align: left;
+    padding: 20px;
+}
+
+.lblDivHeader {
+    font-size: 16px;
+}
+
+.lblBekrtext {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: italic;
+}
