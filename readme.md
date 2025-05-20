@@ -18,7 +18,7 @@ EV Charge Simulator är en interaktiv webbaserad simulator som är byggt med **P
 
 ## 🖥 Demo
 
-https://user.github.io/ev-charge-simulator/
+🔗 [Live demo på Render](https://ev-charge-simulator.onrender.com)
 
 ---
 
