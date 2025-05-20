@@ -375,5 +375,7 @@ def update_range_display(current_km, max_km, battery_kwh, efficiency_pct, charge
 
 # endregion === SLUT UPPDATERA HÄNDELSE I GRAF MED VÄRDE
 
+
+app = app.server  # För Gunicorn / WSGI
 if __name__ == '__main__':
     app.run(debug=True)
