@@ -1,13 +1,13 @@
 import dash
 import dash_bootstrap_components as dbc
 import plotly.graph_objs as go
-from dash import Dash, dcc, html, Input, Output, State
+from dash import Dash, dcc, html, Input, Output, State, exceptions
 
 app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server  ## För Gunicorn / WSGI (Render)
 
-app.layout = html.Div([  # BYT UT dbc.Container MOT html.Div FÖR FLEX
-    html.H2("Beräkning av laddtid för elbil med räckvidsberäkning"),  # === RUBRIK
+app.layout = html.Div([ 
+    html.H2("Beräkning av laddtid för elbil med räckvidsberäkning"), 
     html.Br(),
     # === FLEX-CONTAINER STARTAR
     html.Div([  
@@ -55,7 +55,7 @@ app.layout = html.Div([  # BYT UT dbc.Container MOT html.Div FÖR FLEX
                             {"label": "100–150 kw, DC", "value": "150"},
                             {"label": "200–350 kw, DC", "value": "350"},
                         ],
-                        value="--VÄLJ--",
+                        value=None,
                         clearable=False,
                         style={"width": "170px"}
                     )
@@ -225,8 +225,9 @@ def toggle_slider_visibility(toggle_values):
 
 # === UPPDATERA TEXT
 def update_charger_display(charger_size_kw, charger_efficiency, charger_max_limit, charger_max_toggle):
+
     if not charger_size_kw or not charger_efficiency:
-        return "Välj laddare och verkningsgrad"
+        return "⚠ Välj laddare och verkningsgrad"
 
     limit_active = 'enabled' in charger_max_toggle
 
@@ -327,6 +328,8 @@ def update_battery_image(current_val, max_val):
         return "/assets/battery_50.png"
     elif percentage >= 15:
         return "/assets/battery_25.png"
+    elif percentage >= 5:
+        return "/assets/battery_10.png"
     else:
         return "/assets/battery_10.png"
 
@@ -352,7 +355,7 @@ def update_range_display(current_km, max_km, battery_kwh, efficiency_pct, charge
         charger_kw = float(charger_kw)
         limit_factor = float(limit_pct) / 100 if 'enabled' in toggle else 1.0
     except (TypeError, ValueError):
-        return "Aktuell körsträcka: ? km\nLaddtid: ?"
+        return "⚠ Ogiltiga värden"
 
     if max_km == 0 or charger_kw == 0:
         return f"Aktuell körsträcka: {current_km} km\nLaddtid: –"
